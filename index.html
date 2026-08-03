@@ -5,7 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Bedrock — Daily ground for your recovery</title>
 <meta name="description" content="A free daily recovery companion: gratitude journaling, sobriety tracking, nightly reflection, and local resources." />
-<style>
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#0B0E14" />
+<link rel="apple-touch-icon" href="icon-192.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+ <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body { -webkit-font-smoothing: antialiased; font-family: system-ui, -apple-system, sans-serif; }
@@ -877,6 +882,13 @@ function renderSettingsTab(t) {
       state.premium = !state.premium;
       writeLS("settings:premium", state.premium);
       render();
+     if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("service-worker.js").catch(function (err) {
+      console.warn("Service worker registration failed:", err);
+    });
+  });
+     }
     })
   ]);
   wrap.appendChild(el("div", { style: { marginTop: "24px" } }, [sectionLabel(t, "Plan"), planCard]));
