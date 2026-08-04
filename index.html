@@ -503,12 +503,6 @@ function quoteCard(t) {
   ], { background: t.cardAlt, marginBottom: "20px" });
 }
 
-function adBanner(t) {
-  return el("div", {
-    style: { border: "1px dashed " + t.border, borderRadius: "12px", padding: "14px 12px", textAlign: "center", color: t.textMuted, fontSize: "11px", marginTop: "20px", background: t.cardAlt }
-  }, ["Ad space \u2014 connects to a mobile ad network (e.g. AdMob) once packaged as a native app"]);
-}
-
 var TABS = [
   { key: "gratitude", label: "Morning", icon: "\u2600\uFE0F" },
   { key: "sobriety", label: "Sobriety", icon: "\uD83D\uDD25" },
@@ -873,25 +867,6 @@ function renderSettingsTab(t) {
   });
   themeSection.appendChild(grid);
   wrap.appendChild(themeSection);
-
-  var planCard = card(t, [
-    el("div", { style: { fontWeight: "800", fontSize: "15px", color: t.text } }, [state.premium ? "Premium" : "Free"]),
-    el("div", { style: { fontSize: "13px", color: t.textMuted, marginTop: "4px", marginBottom: "12px" } },
-      [state.premium ? "Ads are hidden. Thank you for supporting recovery work." : "Free includes light ad support that helps keep this app alive. Premium removes ads."]),
-    primaryButton(t, state.premium ? "Switch to free" : "Preview premium (demo)", function() {
-      state.premium = !state.premium;
-      writeLS("settings:premium", state.premium);
-      render();
-     if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("service-worker.js").catch(function (err) {
-      console.warn("Service worker registration failed:", err);
-    });
-  });
-     }
-    })
-  ]);
-  wrap.appendChild(el("div", { style: { marginTop: "24px" } }, [sectionLabel(t, "Plan"), planCard]));
 
   var feedbackCard = card(t, [
     el("div", { style: { fontSize: "13px", color: t.text, marginBottom: "10px" } }, ["This app is in beta. Found a bug or have an idea? We'd love to hear it."]),
