@@ -423,10 +423,15 @@ function theme() { return THEMES[state.theme] || THEMES.vivid; }
 =========================================================== */
 var root = document.getElementById("root");
 
-function render() {
-  var t = theme();
-  document.body.style.background = t.bg;
-  root.innerHTML = "";
+  var tabRenderers = {
+    gratitude: renderGratitudeTab,
+    sobriety: renderSobrietyTab,
+    journal: renderJournalTab,
+    resources: renderResourcesTab,
+    settings: renderSettingsTab,
+    install: renderInstallTab // Add this line
+  };
+
 
   var wrap = el("div", { style: { minHeight: "100vh", background: t.bg, fontFamily: t.body, paddingBottom: "90px" } });
   wrap.appendChild(crisisBanner(t));
