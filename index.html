@@ -965,7 +965,8 @@ if ("serviceWorker" in navigator) {
     installBtn.style.display = 'none';
   });
 </script>
-// Check if device is iOS
+
+  // Check if device is iOS
 const isIos = () => {
   const userAgent = window.navigator.userAgent.toLowerCase();
   return /iphone|ipad|ipod/.test(userAgent);
@@ -991,6 +992,6 @@ if (isIos() && !isInStandaloneMode()) {
   `;
   document.body.appendChild(iosBanner);
 }
-   
-</body>body>
+ 
+</body>
 </html>
