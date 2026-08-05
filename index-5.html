@@ -422,7 +422,37 @@ function theme() { return THEMES[state.theme] || THEMES.vivid; }
    RENDER ROOT
 =========================================================== */
 var root = document.getElementById("root");
+function renderInstallTab(t) {
+  var wrap = el("div");
+  wrap.appendChild(el("div", { style: { display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" } }, [
+    el("span", { style: { fontSize: "22px" } }, ["📲"]),
+    el("h2", { style: { fontFamily: t.display, fontSize: "22px", margin: "0", color: t.text } }, ["Install Bedrock"])
+  ]));
+  wrap.appendChild(el("p", { style: { color: t.textMuted, fontSize: "14px", marginTop: "4px", marginBottom: "18px" } },
+    ["Install Bedrock on your iPhone or iPad to use it like a regular app."]));
 
+  var steps = [
+    "1. Open this page in Safari.",
+    "2. Tap the Share button (square with an up arrow).",
+    "3. Scroll down and tap 'Add to Home Screen'.",
+    "4. Tap 'Add' in the top right corner."
+  ];
+
+  var stepCards = steps.map(function(s) {
+    return el("div", { style: { marginBottom: "12px", color: t.text, fontSize: "15px", lineHeight: "1.5", fontWeight: "600" } }, [s]);
+  });
+
+  wrap.appendChild(card(t, stepCards));
+
+  wrap.appendChild(el("div", { style: { marginTop: "20px" } }, [
+    primaryButton(t, "Download PDF Instructions", function() {
+      window.open("https://files.manuscdn.com/user_upload_by_module/session_file/310519663718110101/vSMYaVyWogAcNORk.pdf", "_blank");
+    })
+  ]));
+
+  return wrap;
+                       }
+   
   var tabRenderers = {
     gratitude: renderGratitudeTab,
     sobriety: renderSobrietyTab,
