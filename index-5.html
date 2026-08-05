@@ -504,12 +504,22 @@ function quoteCard(t) {
   ], { background: t.cardAlt, marginBottom: "20px" });
 }
 
+var TABS = [var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+var isStandalone = window.navigator.standalone === true;
+
 var TABS = [
   { key: "gratitude", label: "Morning", icon: "\u2600\uFE0F" },
   { key: "sobriety", label: "Sobriety", icon: "\uD83D\uDD25" },
   { key: "journal", label: "Evening", icon: "\uD83C\uDF19" },
   { key: "resources", label: "Resources", icon: "\uD83D\uDCCD" },
   { key: "settings", label: "Settings", icon: "\u2699\uFE0F" }
+];
+
+// Only add the Install tab for iOS users who aren't in standalone mode
+if (isIOS && !isStandalone) {
+  TABS.push({ key: "install", label: "Install", icon: "📲" });
+}
+
 ];
 function bottomNav(t) {
   var nav = el("div", {
